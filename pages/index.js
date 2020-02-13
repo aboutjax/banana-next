@@ -7,7 +7,7 @@ const Header = styled.h1`
 `;
 
 let authUrl = "https://strava-auth.herokuapp.com";
-if (process.env.NODE_ENV === "development") {
+if (process.env.environment === "development") {
   authUrl = "http://localhost:3000";
 } else {
   authUrl = "https://strava-auth.herokuapp.com";
