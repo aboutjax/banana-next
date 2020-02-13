@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "builds": {
+  "build": {
     "env": {
-      "SECRET": "https://strava-auth.herokuapp.com"
+      "loginurl": "@loginurl"
     }
   }
 }
