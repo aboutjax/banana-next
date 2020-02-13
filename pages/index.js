@@ -9,7 +9,7 @@ const Header = styled.h1`
 const Home = props => {
   return (
     <div>
-      <Header>{process.env.loginurl}</Header>
+      <Header>{process.env.LOGIN_URL}</Header>
     </div>
   );
 };
