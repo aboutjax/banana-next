@@ -1,5 +1,5 @@
 module.exports = {
   env: {
-    environment: "development"
+    SECRET: "jacky lee"
   }
 };

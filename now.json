@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "SECRET": "https://strava-auth.herokuapp.com"
+    }
+  }
+}
