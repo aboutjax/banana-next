@@ -27,5 +27,3 @@ You can deploy your new Next.js project with a single command from your terminal
 ```shell
 $ now
 ```
-
-test
