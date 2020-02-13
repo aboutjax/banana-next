@@ -1,8 +1,8 @@
 ![Next.js Logo](../../packages/frameworks/logos/next.svg)
 
-# Next.js Example
+# Start locally
 
-This directory is a brief example of a [Next.js](https://nextjs.org) app that can be deployed with ZEIT Now and zero configuration.
+`npm run dev`
 
 ## Deploy Your Own
 

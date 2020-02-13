@@ -1,56 +1,20 @@
 import React from "react";
 import Link from "next/link";
+import styled from "styled-components";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "https://github.com/zeit/next.js", label: "GitHub" }
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`;
-  return link;
-});
+const TopNavigation = styled.nav`
+  background-color: ${props => props.theme.colors.background};
+  padding: ${props => props.theme.tokens.spacing.XXL.value};
+
+  @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
+    padding: ${props => props.theme.tokens.spacing.M.value};
+  }
+`;
 
 const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </li>
-      {links.map(({ key, href, label }) => (
-        <li key={key}>
-          <a href={href}>{label}</a>
-        </li>
-      ))}
-    </ul>
-
-    <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
-      }
-      nav {
-        text-align: center;
-      }
-      ul {
-        display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #067df7;
-        text-decoration: none;
-        font-size: 13px;
-      }
-    `}</style>
-  </nav>
+  <TopNavigation>
+    <h4>banana</h4>
+  </TopNavigation>
 );
 
 export default Nav;

@@ -1,6 +1,10 @@
+import Tokens from "./tokens";
+
 export default {
   colors: {
-    background: "#d8d8d8",
-    text: "#000000"
-  }
+    background: Tokens.color.white.value,
+    text: Tokens.color.black.value,
+    cardBackground: Tokens.color.porcelain.value
+  },
+  tokens: Tokens
 };
