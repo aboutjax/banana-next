@@ -27,52 +27,46 @@ const ActivitiesNav = styled.nav`
 `;
 
 const OverlayLight = styled.div`
-display: none;
-content: "";
-position: absolute;
-top: 0;
-bottom: 0;
-right: 0;
-left: 70%;
-height: 100px;
-height: 
-pointer-events: none;
-touch-action: none
-background: linear-gradient(
-  270deg,
-  rgba(255, 255, 255, 100) 0%,
-  rgba(255, 255, 255, 0) 100%
+  display: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 70%;
+  height: 100px;
+  pointer-events: none;
+
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 100) 0%,
+    rgba(255, 255, 255, 0) 100%
   );
 
-@media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-  display: block;
-}
+  @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
+    display: block;
+  }
 `;
 
 const OverlayDark = styled.div`
-display: none;
-content: "";
-position: absolute;
-top: 0;
-bottom: 0;
-right: 0;
-left: 70%;
-height: 100px;
-height: 
-pointer-events: none;
-touch-action: none
+  display: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 70%;
+  height: 100px;
 
-background: linear-gradient(
-  270deg,
-  rgba(0, 0, 0, 100) 0%,
-  rgba(0, 0, 0, 0) 100%
-);
+  background: linear-gradient(
+    270deg,
+    rgba(0, 0, 0, 100) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
 
-@media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-  display: block;
-}
-
-
+  @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
+    display: block;
+  }
 `;
 
 const NavItem = styled.li`
@@ -97,9 +91,9 @@ const NavItem = styled.li`
 
 function OverlayComponent(props) {
   if (props.theme === "dark") {
-    return <OverlayDark></OverlayDark>;
+    return <OverlayDark style={{ pointerEvents: "none" }}></OverlayDark>;
   } else {
-    return <OverlayLight></OverlayLight>;
+    return <OverlayLight style={{ pointerEvents: "none" }}></OverlayLight>;
   }
 }
 function SubNav(props) {
