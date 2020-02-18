@@ -58,11 +58,11 @@ const Activities = props => {
 
   if (page) {
     activitiesFetchUrl =
-      "https://www.strava.com/api/v3/athlete/activities?per_page=40&page=" +
+      "https://www.strava.com/api/v3/athlete/activities?per_page=10&page=" +
       page;
   } else {
     activitiesFetchUrl =
-      "https://www.strava.com/api/v3/athlete/activities?per_page=40&page=1";
+      "https://www.strava.com/api/v3/athlete/activities?per_page=10&page=1";
   }
 
   let currentTime = Date.now() / 1000;

@@ -37,7 +37,7 @@ left: 70%;
 height: 100px;
 height: 
 pointer-events: none;
-
+touch-action: none
 background: linear-gradient(
   270deg,
   rgba(255, 255, 255, 100) 0%,
@@ -51,25 +51,28 @@ background: linear-gradient(
 
 const OverlayDark = styled.div`
 display: none;
+content: "";
+position: absolute;
+top: 0;
+bottom: 0;
+right: 0;
+left: 70%;
+height: 100px;
+height: 
+pointer-events: none;
+touch-action: none
+
+background: linear-gradient(
+  270deg,
+  rgba(0, 0, 0, 100) 0%,
+  rgba(0, 0, 0, 0) 100%
+);
 
 @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
   display: block;
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 70%;
-  height: 100px;
-  height: 
-  pointer-events: none;
-
-  background: linear-gradient(
-    270deg,
-    rgba(0, 0, 0, 100) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
 }
+
+
 `;
 
 const NavItem = styled.li`
