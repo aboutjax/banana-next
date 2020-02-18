@@ -8,6 +8,7 @@ const Container = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding: ${props => props.theme.tokens.spacing.XXL.value};
   position: relative;
+  padding-top: 0;
 
   grid-column-start: 2;
   grid-column-end: 3;
@@ -24,7 +25,7 @@ const Container = styled.div`
     display: grid;
     min-width: auto;
     width: 100%;
-    grid-row-gap: ${props => props.theme.tokens.spacing.XXL.value};
+    grid-row-gap: ${props => props.theme.tokens.spacing.XL.value};
 
     grid-template-rows: 60px 1fr;
     grid-template-columns: 1fr;
@@ -33,6 +34,7 @@ const Container = styled.div`
     grid-column-end: 4;
 
     padding: ${props => props.theme.tokens.spacing.L.value};
+    padding-top: 0;
   }
 `;
 

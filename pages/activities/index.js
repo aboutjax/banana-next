@@ -12,6 +12,7 @@ import SubNav from "../../components/subnav";
 const Container = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding: ${props => props.theme.tokens.spacing.XXL.value};
+  padding-top: 0;
   position: relative;
 
   grid-column-start: 2;
@@ -38,6 +39,7 @@ const Container = styled.div`
     grid-column-end: 4;
 
     padding: ${props => props.theme.tokens.spacing.L.value};
+    padding-top: 0;
   }
 `;
 
@@ -101,7 +103,6 @@ const Activities = props => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1
-        // delayChildren: 0.3
       }
     },
     hide: {

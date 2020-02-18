@@ -19,6 +19,8 @@ const TopNavigation = styled.nav`
   grid-row-start: 1;
   grid-row-end: 2;
 
+  // border-bottom: 1px solid ${props => props.theme.colors.text};
+
   @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
     padding: ${props => props.theme.tokens.spacing.L.value};
   }
