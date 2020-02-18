@@ -6,58 +6,188 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors.text};
   }
 
+  * {box-sizing: border-box; -webkit-font-smoothing: antialiased;}
+
   h1 {
-    font-size: ${props => props.theme.tokens.typography.large.heading1.size};
+    margin-top:  ${props =>
+      props.theme.tokens.typography.large.heading1.marginTop.value};
+    margin-bottom: ${props =>
+      props.theme.tokens.typography.large.heading1.marginBottom.value};
+    font-size: ${props =>
+      props.theme.tokens.typography.large.heading1.size.value};
+    letter-spacing: ${props =>
+      props.theme.tokens.typography.large.heading1.letterSpacing.value};
+    line-height: ${props =>
+      props.theme.tokens.typography.large.heading1.lineHeight.value};
     @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      font-size: ${props => props.theme.tokens.typography.small.heading1.size};
-    } 
+      margin-top:  ${props =>
+        props.theme.tokens.typography.small.heading1.marginTop.value};
+      margin-bottom: ${props =>
+        props.theme.tokens.typography.small.heading1.marginBottom.value};
+      font-size: ${props =>
+        props.theme.tokens.typography.small.heading1.size.value};
+      letter-spacing: ${props =>
+        props.theme.tokens.typography.small.heading1.letterSpacing.value};
+      line-height: ${props =>
+        props.theme.tokens.typography.small.heading1.lineHeight.value};
+    }
   }
 
   h2 {
-    font-size: ${props => props.theme.tokens.typography.large.heading2.size};
+    margin-top:  ${props =>
+      props.theme.tokens.typography.large.heading2.marginTop.value};
+    margin-bottom: ${props =>
+      props.theme.tokens.typography.large.heading2.marginBottom.value};
+    font-size: ${props =>
+      props.theme.tokens.typography.large.heading2.size.value};
+    letter-spacing: ${props =>
+      props.theme.tokens.typography.large.heading2.letterSpacing.value};
+    line-height: ${props =>
+      props.theme.tokens.typography.large.heading2.lineHeight.value};
     @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      font-size: ${props => props.theme.tokens.typography.small.heading2.size};
+      margin-top:  ${props =>
+        props.theme.tokens.typography.small.heading2.marginTop.value};
+      margin-bottom: ${props =>
+        props.theme.tokens.typography.small.heading2.marginBottom.value};
+      font-size: ${props =>
+        props.theme.tokens.typography.small.heading2.size.value};
+      letter-spacing: ${props =>
+        props.theme.tokens.typography.small.heading2.letterSpacing.value};
+      line-height: ${props =>
+        props.theme.tokens.typography.small.heading2.lineHeight.value};
     }
   }
 
   h3 {
-    font-size: ${props => props.theme.tokens.typography.large.heading3.size};
+    margin-top:  ${props =>
+      props.theme.tokens.typography.large.heading3.marginTop.value};
+    margin-bottom: ${props =>
+      props.theme.tokens.typography.large.heading3.marginBottom.value};
+    font-size: ${props =>
+      props.theme.tokens.typography.large.heading3.size.value};
+    letter-spacing: ${props =>
+      props.theme.tokens.typography.large.heading3.letterSpacing.value};
+    line-height: ${props =>
+      props.theme.tokens.typography.large.heading3.lineHeight.value};
     @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      font-size: ${props => props.theme.tokens.typography.small.heading3.size};
+      margin-top:  ${props =>
+        props.theme.tokens.typography.small.heading3.marginTop.value};
+      margin-bottom: ${props =>
+        props.theme.tokens.typography.small.heading3.marginBottom.value};
+      font-size: ${props =>
+        props.theme.tokens.typography.small.heading3.size.value};
+      letter-spacing: ${props =>
+        props.theme.tokens.typography.small.heading3.letterSpacing.value};
+      line-height: ${props =>
+        props.theme.tokens.typography.small.heading3.lineHeight.value};
     }
   }
 
   h4 {
-    font-size: ${props => props.theme.tokens.typography.large.heading4.size};
-    font-weight: ${props =>
-      props.theme.tokens.typography.large.heading4.weight};
+    margin-top:  ${props =>
+      props.theme.tokens.typography.large.heading4.marginTop.value};
+    margin-bottom: ${props =>
+      props.theme.tokens.typography.large.heading4.marginBottom.value};
+    font-size: ${props =>
+      props.theme.tokens.typography.large.heading4.size.value};
+    letter-spacing: ${props =>
+      props.theme.tokens.typography.large.heading4.letterSpacing.value};
+    line-height: ${props =>
+      props.theme.tokens.typography.large.heading4.lineHeight.value};
+    font-weight: normal;
     @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      font-size: ${props => props.theme.tokens.typography.small.heading4.size};
+      margin-top:  ${props =>
+        props.theme.tokens.typography.small.heading4.marginTop.value};
+      margin-bottom: ${props =>
+        props.theme.tokens.typography.small.heading4.marginBottom.value};
+      font-size: ${props =>
+        props.theme.tokens.typography.small.heading4.size.value};
+      letter-spacing: ${props =>
+        props.theme.tokens.typography.small.heading4.letterSpacing.value};
+      line-height: ${props =>
+        props.theme.tokens.typography.small.heading4.lineHeight.value};
+      font-weight: normal;
     }
   }
 
   h5 {
-    font-size: ${props => props.theme.tokens.typography.large.eyebrow.size};
-    font-weight: ${props =>
-      props.theme.tokens.typography.large.eyebrow.weight};;
+    margin-top:  ${props =>
+      props.theme.tokens.typography.large.eyebrow.marginTop.value};
+    margin-bottom: ${props =>
+      props.theme.tokens.typography.large.eyebrow.marginBottom.value};
+    font-size: ${props =>
+      props.theme.tokens.typography.large.eyebrow.size.value};
+    letter-spacing: ${props =>
+      props.theme.tokens.typography.large.eyebrow.letterSpacing.value};
+    line-height: ${props =>
+      props.theme.tokens.typography.large.eyebrow.lineHeight.value};
     text-transform: ${props =>
-      props.theme.tokens.typography.large.eyebrow.transform};
+      props.theme.tokens.typography.large.eyebrow.textTransform.value};
+    font-weight: normal;
     @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      font-size: ${props => props.theme.tokens.typography.small.eyebrow.size};
+      margin-top:  ${props =>
+        props.theme.tokens.typography.small.eyebrow.marginTop.value};
+      margin-bottom: ${props =>
+        props.theme.tokens.typography.small.eyebrow.marginBottom.value};
+      font-size: ${props =>
+        props.theme.tokens.typography.small.eyebrow.size.value};
+      letter-spacing: ${props =>
+        props.theme.tokens.typography.small.eyebrow.letterSpacing.value};
+      line-height: ${props =>
+        props.theme.tokens.typography.small.eyebrow.lineHeight.value};
+      text-transform: ${props =>
+        props.theme.tokens.typography.large.eyebrow.textTransform.value};
+      font-weight: normal;
     }
   }
 
   p {
-    font-size: ${props => props.theme.tokens.typography.large.paragraph.size};
+    margin-top:  ${props =>
+      props.theme.tokens.typography.large.paragraph.marginTop.value};
+    margin-bottom: ${props =>
+      props.theme.tokens.typography.large.paragraph.marginBottom.value};
+    font-size: ${props =>
+      props.theme.tokens.typography.large.paragraph.size.value};
+    letter-spacing: ${props =>
+      props.theme.tokens.typography.large.paragraph.letterSpacing.value};
+    line-height: ${props =>
+      props.theme.tokens.typography.large.paragraph.lineHeight.value};
     @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      font-size: ${props => props.theme.tokens.typography.small.paragraph.size};
+      margin-top:  ${props =>
+        props.theme.tokens.typography.small.paragraph.marginTop.value};
+      margin-bottom: ${props =>
+        props.theme.tokens.typography.small.paragraph.marginBottom.value};
+      font-size: ${props =>
+        props.theme.tokens.typography.small.paragraph.size.value};
+      letter-spacing: ${props =>
+        props.theme.tokens.typography.small.paragraph.letterSpacing.value};
+      line-height: ${props =>
+        props.theme.tokens.typography.small.paragraph.lineHeight.value};
     }
   }
 
-  caption {
-    font-size: ${props => props.theme.tokens.typography.large.caption.size};
+  span {
+    margin-top:  ${props =>
+      props.theme.tokens.typography.large.caption.marginTop.value};
+    margin-bottom: ${props =>
+      props.theme.tokens.typography.large.caption.marginBottom.value};
+    font-size: ${props =>
+      props.theme.tokens.typography.large.caption.size.value};
+    letter-spacing: ${props =>
+      props.theme.tokens.typography.large.caption.letterSpacing.value};
+    line-height: ${props =>
+      props.theme.tokens.typography.large.caption.lineHeight.value};
     @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      font-size: ${props => props.theme.tokens.typography.small.caption.size};
+      margin-top:  ${props =>
+        props.theme.tokens.typography.small.caption.marginTop.value};
+      margin-bottom: ${props =>
+        props.theme.tokens.typography.small.caption.marginBottom.value};
+      font-size: ${props =>
+        props.theme.tokens.typography.small.caption.size.value};
+      letter-spacing: ${props =>
+        props.theme.tokens.typography.small.caption.letterSpacing.value};
+      line-height: ${props =>
+        props.theme.tokens.typography.small.caption.lineHeight.value};
     }
   }
 `;

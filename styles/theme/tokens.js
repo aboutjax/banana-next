@@ -1,13 +1,13 @@
 export default {
   mediaQueries: { large: "1024px", small: "768px" },
-  borderRadius: { value: "4px" },
+  borderRadius: { value: "6px" },
   spacing: {
     XS: { value: "4px" },
     S: { value: "8px" },
     M: { value: "16px" },
     L: { value: "24px" },
     XL: { value: "32px" },
-    XXL: { value: "32px" }
+    XXL: { value: "64px" }
   },
   color: {
     mineShaft: { value: "#282828" },
@@ -18,92 +18,120 @@ export default {
   typography: {
     large: {
       heading1: {
-        size: "72px",
-        letterSpacing: "-0.02em",
-        weight: 800,
-        lineHeight: "110%"
+        size: { value: "72px" },
+        letterSpacing: { value: "-0.02em" },
+        weight: { value: 800 },
+        lineHeight: { value: "84px" },
+        marginTop: { value: "21px" },
+        marginBottom: { value: "42px" }
       },
       heading2: {
-        size: "48px",
-        letterSpacing: "-0.01em",
-        weight: 800,
-        lineHeight: "110%"
+        size: { value: "43px" },
+        letterSpacing: { value: "-0.01em" },
+        weight: { value: 800 },
+        lineHeight: { value: "63px" },
+        marginTop: { value: "21px" },
+        marginBottom: { value: "21px" }
       },
       heading3: {
-        size: "32px",
-        letterSpacing: "0em",
-        weight: 800,
-        lineHeight: "110%"
+        weight: { value: 800 },
+        size: { value: "26px" },
+        letterSpacing: { value: "-0.01em" },
+        lineHeight: { value: "42px" },
+        marginTop: { value: "21px" },
+        marginBottom: { value: "0px" }
       },
       heading4: {
-        size: "24px",
-        letterSpacing: "0em",
-        weight: "normal",
-        lineHeight: "150%"
+        weight: { value: 400 },
+        size: { value: "18px" },
+        letterSpacing: { value: "-0.01em" },
+        lineHeight: { value: "21px" },
+        marginTop: { value: "21px" },
+        marginBottom: { value: "0px" }
       },
       eyebrow: {
-        size: "18px",
-        letterSpacing: "0.04em",
-        weight: "normal",
-        lineHeight: "150%",
-        transform: "uppercase"
+        weight: { value: 400 },
+        size: { value: "18px" },
+        letterSpacing: { value: "0.04em" },
+        lineHeight: { value: "21px" },
+        marginTop: { value: "21px" },
+        marginBottom: { value: "0px" },
+        textTransform: { value: "uppercase" }
       },
       paragraph: {
-        size: "16px",
-        letterSpacing: "0.02em",
-        weight: "normal",
-        lineHeight: "150%"
+        weight: { value: 400 },
+        size: { value: "16px" },
+        letterSpacing: { value: "0em" },
+        lineHeight: { value: "21px" },
+        marginTop: { value: "21px" },
+        marginBottom: { value: "0px" }
       },
       caption: {
-        size: "14px",
-        letterSpacing: "0.02em",
-        weight: "normal",
-        lineHeight: "150%"
+        weight: { value: 400 },
+        size: { value: "14px" },
+        letterSpacing: { value: "0.02em" },
+        lineHeight: { value: "21px" },
+        marginTop: { value: "21px" },
+        marginBottom: { value: "0px" }
       }
     },
     small: {
       heading1: {
-        size: "48px",
-        letterSpacing: "-0.02em",
-        weight: 800,
-        lineHeight: "110%"
+        size: { value: "63px" },
+        letterSpacing: { value: "-0.02em" },
+        weight: { value: 800 },
+        lineHeight: { value: "72px" },
+        marginTop: { value: "18px" },
+        marginBottom: { value: "36px" }
       },
       heading2: {
-        size: "36px",
-        letterSpacing: "-0.01em",
-        weight: 800,
-        lineHeight: "110%"
+        size: { value: "38px" },
+        letterSpacing: { value: "-0.01em" },
+        weight: { value: 800 },
+        lineHeight: { value: "54px" },
+        marginTop: { value: "18px" },
+        marginBottom: { value: "18px" }
       },
       heading3: {
-        size: "24px",
-        letterSpacing: "0em",
-        weight: 800,
-        lineHeight: "110%"
+        weight: { value: 800 },
+        size: { value: "23px" },
+        letterSpacing: { value: "-0.01em" },
+        lineHeight: { value: "36px" },
+        marginTop: { value: "18px" },
+        marginBottom: { value: "0px" }
       },
       heading4: {
-        size: "18px",
-        letterSpacing: "0em",
-        weight: "normal",
-        lineHeight: "150%"
+        weight: { value: 400 },
+        size: { value: "16px" },
+        letterSpacing: { value: "-0.01em" },
+        lineHeight: { value: "18px" },
+        marginTop: { value: "18px" },
+        marginBottom: { value: "0px" }
       },
       eyebrow: {
-        size: "14px",
-        letterSpacing: "0.04em",
-        weight: "normal",
-        lineHeight: "150%",
-        transform: "uppercase"
+        weight: { value: 400 },
+        size: { value: "14px" },
+        letterSpacing: { value: "0.04em" },
+        lineHeight: { value: "18px" },
+        marginTop: { value: "18px" },
+        marginBottom: { value: "0px" },
+        textTransform: { value: "uppercase" }
       },
       paragraph: {
-        size: "14px",
-        letterSpacing: "0.02em",
-        weight: "normal",
-        lineHeight: "150%"
+        weight: { value: 400 },
+        size: { value: "14px" },
+        letterSpacing: { value: "0em" },
+        lineHeight: { value: "18px" },
+        marginTop: { value: "18px" },
+        marginBottom: { value: "0px" }
       },
       caption: {
-        size: "12",
-        letterSpacing: "0.02em",
-        weight: "normal",
-        lineHeight: "150%"
+        weight: { value: 400 },
+        size: { value: "13px" },
+        letterSpacing: { value: "0.02em" },
+        lineHeight: { value: "18px" },
+        marginTop: { value: "18px" },
+        marginBottom: { value: "0px" }
       }
     }
   }

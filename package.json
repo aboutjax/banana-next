@@ -12,8 +12,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mapbox/polyline": "^1.1.0",
+    "firebase": "^7.8.2",
+    "framer-motion": "^1.8.4",
     "isomorphic-unfetch": "^3.0.0",
+    "mapbox-gl": "^1.7.0",
+    "moment": "^2.24.0",
     "next": "^9.1.6",
+    "next-cookies": "^2.0.3",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-cookie": "^4.0.3",
