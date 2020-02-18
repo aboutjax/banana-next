@@ -67,7 +67,7 @@ const Nav = props => {
           <h4>log out</h4>
         </NavLink>
       ) : (
-        <NavLink href="http://localhost:3000">
+        <NavLink href="https://banana-server.now.sh/">
           <h4>log in</h4>
         </NavLink>
       )}
