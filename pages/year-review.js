@@ -7,6 +7,7 @@ import SubNav from "../components/subnav";
 const Container = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding: ${props => props.theme.tokens.spacing.XXL.value};
+  position: relative;
 
   grid-column-start: 2;
   grid-column-end: 3;
