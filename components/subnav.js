@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { IconAllActivities, IconYearInReview } from "./icons/icons";
 import useMedia from "use-media";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ActivitiesNav = styled.nav`
   display: grid;
@@ -26,7 +27,7 @@ const ActivitiesNav = styled.nav`
   }
 `;
 
-const OverlayLight = styled.div`
+const OverlayLight = styled(motion.div)`
   display: none;
   content: "";
   position: absolute;
@@ -34,7 +35,7 @@ const OverlayLight = styled.div`
   bottom: 0;
   right: 0;
   left: 70%;
-  height: 100px;
+  height: 70px;
   pointer-events: none;
 
   background: linear-gradient(
@@ -56,7 +57,7 @@ const OverlayDark = styled.div`
   bottom: 0;
   right: 0;
   left: 70%;
-  height: 100px;
+  height: 70px;
 
   background: linear-gradient(
     270deg,
@@ -90,10 +91,22 @@ const NavItem = styled.li`
 `;
 
 function OverlayComponent(props) {
-  if (props.theme === "dark") {
-    return <OverlayDark style={{ pointerEvents: "none" }}></OverlayDark>;
+  if (props.theme) {
+    return (
+      <OverlayDark
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        style={{ pointerEvents: "none" }}
+      ></OverlayDark>
+    );
   } else {
-    return <OverlayLight style={{ pointerEvents: "none" }}></OverlayLight>;
+    return (
+      <OverlayLight
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        style={{ pointerEvents: "none" }}
+      ></OverlayLight>
+    );
   }
 }
 function SubNav(props) {
@@ -104,9 +117,7 @@ function SubNav(props) {
 
   return (
     <ActivitiesNav>
-      <OverlayComponent
-        theme={mediaDarkMode ? "dark" : "light"}
-      ></OverlayComponent>
+      <OverlayComponent theme={mediaDarkMode}></OverlayComponent>
       <Link href="/activities">
         <NavItem active={router.route === "/activities" ? "true" : "false"}>
           <IconAllActivities
