@@ -2,6 +2,7 @@ import React from "react";
 import Router, { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
 import * as firebase from "firebase";
+import dynamic from "next/dynamic";
 
 let accessToken;
 let firebaseToken;
@@ -31,27 +32,31 @@ let setTokensFromUrl = async () => {
 
 const HandleRedirect = () => {
   const [cookies, setCookie] = useCookies([]);
-  console.log("handle redirect base");
 
-  setTokensFromUrl().then(value => {
-    console.log(value);
+  React.useEffect(() => {
+    setTokensFromUrl().then(value => {
+      console.log(value);
 
-    let firebaseToken = value.firebaseToken;
+      let firebaseToken = value.firebaseToken;
 
-    setCookie("access_token", value.accessToken, { path: "/", maxAge: 604800 });
-    setCookie("firebase_token", value.firebaseToken, {
-      path: "/",
-      maxAge: 604800
+      setCookie("access_token", value.accessToken, {
+        path: "/",
+        maxAge: 604800
+      });
+      setCookie("firebase_token", value.firebaseToken, {
+        path: "/",
+        maxAge: 604800
+      });
+      setCookie("refresh_token", value.refreshToken, {
+        path: "/",
+        maxAge: 604800
+      });
+      setCookie("expires_at", value.expiresAt, { path: "/", maxAge: 604800 });
+
+      // signInWithFirebase(firebaseToken);
+      Router.push("/");
     });
-    setCookie("refresh_token", value.refreshToken, {
-      path: "/",
-      maxAge: 604800
-    });
-    setCookie("expires_at", value.expiresAt, { path: "/", maxAge: 604800 });
-
-    // signInWithFirebase(firebaseToken);
-    Router.push("/");
-  });
+  }, []);
 
   return <div>success</div>;
 };
