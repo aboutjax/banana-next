@@ -108,8 +108,9 @@ const YearReview = props => {
             <Skeleton />
           ) : (
             <div>
-              <h2>{stats.biggest_ride_distance}</h2>
-              <h2>{userId}</h2>
+              {/* <h2>{stats.biggest_ride_distance}</h2>
+              <h2>{userId}</h2> */}
+              <h4>✨Coming soon</h4>
             </div>
           )}
         </div>

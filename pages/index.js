@@ -7,8 +7,6 @@ let Container = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding: ${props => props.theme.tokens.spacing.XXL.value};
 
-  justify-self: stretch;
-
   grid-column-start: 2;
   grid-column-end: 3;
 
@@ -42,48 +40,32 @@ const Home = props => {
   return (
     <Wrapper>
       <Container>
-        <h1>Musa sapientum</h1>
+        <h1>Header 1</h1>
+        <h5>https://www.cram.com/essay/the-banana-plant/P3CJMRN2AC</h5>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-          minus dolor quia quibusdam ut quisquam inventore optio sequi
-          architecto, fuga velit nostrum ex amet voluptates dolorem enim ipsam
-          ea odit.
+          Bananas are the fruit of a plant of the genus Musa, which are
+          cultivated primarily for food, and secondarily for the production of
+          fibers. It is alleged that there are almost 1000 varieties of bananas
+          in the world, subdivided in 50 groups (Bora, 2007). The most generally
+          known banana is the seedless Cavendish variety, which is the one
+          produced for export markets and pronounced for consuming.
         </p>
-        <h2>Musa sapientum</h2>
+        <h2>Header 2</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-          minus dolor quia quibusdam ut quisquam inventore optio sequi
-          architecto, fuga velit nostrum ex amet voluptates dolorem enim ipsam
-          ea odit.
+          The banana is the fruit of an herbaceous plant related to the orchid
+          family and is most commonly found in tropical climate areas which
+          become an exotic product of cold environment zones.
         </p>
+        <h3>Header 3</h3>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-          minus dolor quia quibusdam ut quisquam inventore optio sequi
-          architecto, fuga velit nostrum ex amet voluptates dolorem enim ipsam
-          ea odit.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-          minus dolor quia quibusdam ut quisquam inventore optio sequi
-          architecto, fuga velit nostrum ex amet voluptates dolorem enim ipsam
-          ea odit.
+          The banana is believed to have originated in Southeast Asia and
+          Malaysia, and cultivation could have started as early as 8000 BCE. The
+          professionals believe that
         </p>
 
-        <h3>Musa sapientum</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-          minus dolor quia quibusdam ut quisquam inventore optio sequi
-          architecto, fuga velit nostrum ex amet voluptates dolorem enim ipsam
-          ea odit.
-        </p>
-        <h4>Musa sapientum</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-          minus dolor quia quibusdam ut quisquam inventore optio sequi
-          architecto, fuga velit nostrum ex amet voluptates dolorem enim ipsam
-          ea odit.
-        </p>
-        <h5>Musa sapientum</h5>
+        <h4>Header 4</h4>
+
+        <h5>Eyebrow</h5>
         <p>Musa sapientum</p>
         <span>Musa sapientum</span>
       </Container>

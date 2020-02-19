@@ -8,6 +8,7 @@ const Container = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding: ${props => props.theme.tokens.spacing.XXL.value};
   position: relative;
+  padding-top: 0;
 
   grid-column-start: 2;
   grid-column-end: 3;
@@ -24,7 +25,7 @@ const Container = styled.div`
     display: grid;
     min-width: auto;
     width: 100%;
-    grid-row-gap: ${props => props.theme.tokens.spacing.XXL.value};
+    grid-row-gap: ${props => props.theme.tokens.spacing.XL.value};
 
     grid-template-rows: 60px 1fr;
     grid-template-columns: 1fr;
@@ -33,6 +34,7 @@ const Container = styled.div`
     grid-column-end: 4;
 
     padding: ${props => props.theme.tokens.spacing.L.value};
+    padding-top: 0;
   }
 `;
 
@@ -50,10 +52,11 @@ const Favourites = props => {
 
   React.useEffect(() => {
     if (!access_token) {
-      console.log("from /favourites: no access token");
+      // console.log("from /favourites: no access token");
       Router.push("/");
     } else {
-      console.log("from /favourites: access token found");
+      // console.log("from /favourites: access token found");
+      setLoading(false);
     }
   }, [access_token]);
 
@@ -63,13 +66,7 @@ const Favourites = props => {
         <SubNav></SubNav>
         <div>
           <PageHeader>Favourites</PageHeader>
-          {loading ? (
-            <Skeleton />
-          ) : (
-            activities.map(activity => (
-              <ActivityCard key={activity.id} activity={activity} />
-            ))
-          )}
+          {loading ? <Skeleton /> : <h4>✨Coming soon</h4>}
         </div>
       </Container>
     </Wrapper>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TopNavigation from "../nav";
-import cookies from "next-cookies";
+import SubNav from "../../components/subnav";
 
 const Container = styled.div`
   display: grid;

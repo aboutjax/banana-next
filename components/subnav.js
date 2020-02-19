@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { IconAllActivities, IconYearInReview } from "./icons/icons";
+import {
+  IconAllActivities,
+  IconYearInReview,
+  IconFavourites
+} from "./icons/icons";
 import useMedia from "use-media";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -81,9 +85,9 @@ const NavItem = styled.li`
     props.active === "true"
       ? props.theme.colors.cardBackground
       : props.theme.colors.background};
-  &:hover {
+  /* &:hover {
     opacity: 0.5;
-  }
+  } */
 
   svg {
     margin-right: ${props => props.theme.tokens.spacing.S.value};
@@ -118,7 +122,7 @@ function SubNav(props) {
   return (
     <ActivitiesNav>
       <OverlayComponent theme={mediaDarkMode}></OverlayComponent>
-      <Link href="/activities">
+      <Link scroll={false} href="/activities">
         <NavItem active={router.route === "/activities" ? "true" : "false"}>
           <IconAllActivities
             theme={mediaDarkMode ? "dark" : "light"}
@@ -126,12 +130,13 @@ function SubNav(props) {
           All activities
         </NavItem>
       </Link>
-      {/* <Link href="/favourites">
+      <Link scroll={false} href="/favourites">
         <NavItem active={router.route === "/favourites" ? "true" : "false"}>
+          <IconFavourites></IconFavourites>
           Favourites
         </NavItem>
-      </Link> */}
-      <Link href="/year-review">
+      </Link>
+      <Link scroll={false} href="/year-review">
         <NavItem active={router.route === "/year-review" ? "true" : "false"}>
           <IconYearInReview
             theme={mediaDarkMode ? "dark" : "light"}

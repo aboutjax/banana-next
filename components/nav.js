@@ -19,8 +19,6 @@ const TopNavigation = styled.nav`
   grid-row-start: 1;
   grid-row-end: 2;
 
-  // border-bottom: 1px solid ${props => props.theme.colors.text};
-
   @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
     padding: ${props => props.theme.tokens.spacing.L.value};
   }
@@ -59,17 +57,19 @@ const Nav = props => {
 
   let authState = props.auth;
 
+  console.log(process.env.LOGIN_URL);
+
   return (
     <TopNavigation>
       <Link href="/">
-        <h4 className="logo">banana</h4>
+        <h4>banana</h4>
       </Link>
       {authState ? (
         <NavLink href="#" onClick={logout}>
           <h4>log out</h4>
         </NavLink>
       ) : (
-        <NavLink href="https://banana-server.now.sh/">
+        <NavLink href={process.env.LOGIN_URL}>
           <h4>log in</h4>
         </NavLink>
       )}
