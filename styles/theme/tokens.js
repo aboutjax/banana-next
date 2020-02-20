@@ -13,7 +13,12 @@ export default {
     mineShaft: { value: "#282828" },
     white: { value: "#FFFFFF" },
     black: { value: "#000000" },
-    porcelain: { value: "#F1F4F5" }
+    porcelain: { value: "#F1F4F5" },
+    goldenTainoiapprox: { value: "#FFC55F" },
+    flamePeaapprox: { value: "#DC524D" },
+    shadowGreen: { value: "#93C4C7" },
+    wildBlueYonder: { value: "#7D88BC" },
+    quaterSpanishWhite: { value: "#F6F1E1" }
   },
   typography: {
     large: {

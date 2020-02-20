@@ -3,6 +3,9 @@ import Skeleton from "../components/skeleton";
 import React from "react";
 import Wrapper from "../components/layout/wrapper";
 import SubNav from "../components/subnav";
+import { StatCard } from "../components/achievements/card";
+import { motion, AnimatePresence } from "framer-motion";
+import moment from "moment";
 
 const Container = styled.div`
   background-color: ${props => props.theme.colors.background};
@@ -43,12 +46,20 @@ const PageHeader = styled.h3`
   margin-bottom: ${props => props.theme.tokens.spacing.L.value};
 `;
 
-const YearReview = props => {
+const StatsGrid = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: minmax(150px, auto);
+  grid-gap: 1em;
+`;
+
+const Stats = props => {
   // States
   let [loading, setLoading] = React.useState(true);
   let [user, setUser] = React.useState({});
   let [userId, setUserId] = React.useState("");
   let [stats, setStats] = React.useState();
+  let [totalMovingTime, setTotalMovingTime] = React.useState(0);
 
   // Cookies
   const { allCookies } = props;
@@ -92,26 +103,83 @@ const YearReview = props => {
           ).then(json => {
             setStats(json);
 
+            let duration = moment.duration(
+              json.all_ride_totals.moving_time,
+              "seconds"
+            );
+            let durationAsHours = duration.asHours();
+
+            function round(value, decimals) {
+              return Number(
+                Math.round(value + "e" + decimals) + "e-" + decimals
+              );
+            }
+
+            setTotalMovingTime(round(durationAsHours, 1)); // 1.01);
+
             setLoading(false);
           });
         });
     }
   }, [access_token]);
 
+  console.log(stats);
+
+  const parentVariants = {
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5
+      }
+    },
+    hide: { opacity: 0 }
+  };
+
   return (
     <Wrapper props={props}>
       <Container>
         <SubNav></SubNav>
         <div>
-          <PageHeader>Year in Review</PageHeader>
           {loading ? (
             <Skeleton />
           ) : (
-            <div>
-              {/* <h2>{stats.biggest_ride_distance}</h2>
-              <h2>{userId}</h2> */}
-              <h4>✨Coming soon</h4>
-            </div>
+            <AnimatePresence>
+              <StatsGrid
+                exit={{ opacity: 0 }}
+                initial={"hide"}
+                variants={parentVariants}
+                animate={"show"}
+              >
+                <StatCard
+                  type={5}
+                  value={stats.all_ride_totals.count}
+                  label="total rides"
+                  unit="rides"
+                ></StatCard>
+                <StatCard
+                  type={2}
+                  value={Math.floor(
+                    stats.all_ride_totals.distance / 1000
+                  ).toLocaleString()}
+                  label="total distance"
+                  unit="km"
+                ></StatCard>
+                <StatCard
+                  type={1}
+                  value={Math.floor(
+                    stats.all_ride_totals.elevation_gain
+                  ).toLocaleString()}
+                  label="Elevation gain"
+                  unit="m"
+                ></StatCard>
+                <StatCard
+                  type={4}
+                  value={totalMovingTime}
+                  label="Total time"
+                  unit="hours"
+                ></StatCard>
+              </StatsGrid>
+            </AnimatePresence>
           )}
         </div>
       </Container>
@@ -119,4 +187,4 @@ const YearReview = props => {
   );
 };
 
-export default YearReview;
+export default Stats;

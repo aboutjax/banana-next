@@ -136,12 +136,12 @@ function SubNav(props) {
           Favourites
         </NavItem>
       </Link>
-      <Link scroll={false} href="/year-review">
-        <NavItem active={router.route === "/year-review" ? "true" : "false"}>
+      <Link scroll={false} href="/stats">
+        <NavItem active={router.route === "/stats" ? "true" : "false"}>
           <IconYearInReview
             theme={mediaDarkMode ? "dark" : "light"}
           ></IconYearInReview>
-          Year in Review
+          Stats
         </NavItem>
       </Link>
     </ActivitiesNav>

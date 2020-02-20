@@ -5,7 +5,7 @@ import SubNav from "../../components/subnav";
 const Container = styled.div`
   display: grid;
   grid-template-rows: 100px 1fr;
-  grid-template-columns: 1fr minmax(auto, 960px) 1fr;
+  grid-template-columns: 1fr minmax(auto, 1240px) 1fr;
   position: absolute;
   top: 0;
   right: 0;
