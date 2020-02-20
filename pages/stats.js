@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Router from "next/router";
 import Skeleton from "../components/skeleton";
 import React from "react";
 import Wrapper from "../components/layout/wrapper";
