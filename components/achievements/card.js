@@ -146,7 +146,7 @@ const StatCardInfo = styled(motion.div)`
 
 const variants = {
   hide: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 1 } }
+  show: { opacity: 1, y: 0 }
 };
 
 export const StatCard = props => {
@@ -175,7 +175,7 @@ export const StatCard = props => {
         exit={{ opacity: 0 }}
       >
         <StatIconThree />
-        <StatCardInfo>
+        <StatCardInfo initial={"hide"} variants={variants}>
           <h2>
             {props.value} {props.unit}
           </h2>
@@ -192,7 +192,7 @@ export const StatCard = props => {
         exit={{ opacity: 0 }}
       >
         <StatIconThree />
-        <StatCardInfo>
+        <StatCardInfo initial={"hide"} variants={variants}>
           <h2>
             {props.value} {props.unit}
           </h2>
@@ -209,7 +209,7 @@ export const StatCard = props => {
         exit={{ opacity: 0 }}
       >
         <StatIconFour />
-        <StatCardInfo>
+        <StatCardInfo initial={"hide"} variants={variants}>
           <h2>
             {props.value} {props.unit}
           </h2>
@@ -226,7 +226,7 @@ export const StatCard = props => {
         exit={{ opacity: 0 }}
       >
         <StatIconOne />
-        <StatCardInfo>
+        <StatCardInfo initial={"hide"} variants={variants}>
           <h2>
             {props.value} {props.unit}
           </h2>
@@ -243,7 +243,7 @@ export const StatCard = props => {
         exit={{ opacity: 0 }}
       >
         <StatIconThree />
-        <StatCardInfo>
+        <StatCardInfo initial={"hide"} variants={variants}>
           <h2>
             {props.value} {props.unit}
           </h2>
