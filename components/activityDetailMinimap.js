@@ -13,7 +13,7 @@ const style = {
   // position: "absolute"
 };
 
-const Map = props => {
+const SmallMap = props => {
   const mapContainer = React.useRef(null);
   const [map, setMap] = React.useState(null);
   const mediaDarkMode = useMedia("(prefers-color-scheme: dark)");
@@ -152,4 +152,4 @@ const Map = props => {
   return <div style={style} ref={el => (mapContainer.current = el)} />;
 };
 
-export default Map;
+export default SmallMap;
