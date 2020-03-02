@@ -37,10 +37,13 @@ const DynamicMapboxLargeComponent = dynamic(
   { ssr: false }
 );
 
-const DynamicMapboxSmallComponent = dynamic(
-  () => import("../../components/activityDetailMiniMap"),
-  { ssr: false }
-);
+// const DynamicMapboxSmallComponent = dynamic(
+//   () => import("../../components/activityDetailMiniMap"),
+//   { ssr: false }
+// );
+const DynamicTestJacky = dynamic(() => import("../../components/testJacky"), {
+  ssr: false
+});
 
 const LargeMapContainer = styled.div`
   display: block;
@@ -145,9 +148,7 @@ const ActivityDetail = props => {
               <div style={smallMapStyle}>
                 {activitySummary.start_latlng ? (
                   <SmallMapContainer>
-                    <DynamicMapboxSmallComponent
-                      activitySummary={activitySummary}
-                    />
+                    <DynamicTestJacky activitySummary={activitySummary} />
                   </SmallMapContainer>
                 ) : (
                   <div />
