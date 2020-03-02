@@ -188,8 +188,4 @@ const Activities = props => {
   );
 };
 
-Activities.getInitialProps = async () => {
-  return {};
-};
-
 export default Activities;
