@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@mapbox/polyline": "^1.1.0",
-    "@svgr/webpack": "^5.2.0",
     "@zeit/next-css": "^1.0.1",
     "firebase": "^7.8.2",
     "framer-motion": "^1.8.4",
@@ -27,8 +26,7 @@
     "react-cookie": "^4.0.3",
     "react-dom": "^16.12.0",
     "styled-components": "^5.0.1",
-    "use-media": "^1.4.0",
-    "webpack": "^4.42.0"
+    "use-media": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^13.7.1",
