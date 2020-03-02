@@ -4,14 +4,14 @@ import { IconStravaConnect } from "../components/icons/icons";
 let LoginPage = styled.div`
   display: grid;
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  width: 100vw;
+  height: 100vh;
 `;
 
 let LoginButton = styled.a`
   place-self: center;
+  align-self: center;
+  justify-self: center;
   cursor: pointer;
 `;
 const style = {};
