@@ -3,82 +3,75 @@ import fetch from "isomorphic-unfetch";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import ActivityCard from "../../components/actvitity-card";
-import Router from "next/router";
-import { useRouter } from "next/router";
+import ActivityCard from "../../components/activity-card";
+import { AuthContext } from "../_app";
+
+import Router, { useRouter } from "next/router";
 import Skeleton from "../../components/skeleton";
+import { Container } from "../../components/layout/container";
+import { PageHeader } from "../../components/pageHeader";
 import SubNav from "../../components/subnav";
+import Link from "next/link";
+import { Button } from "../../components/button";
 
-const Container = styled.div`
-  background-color: ${props => props.theme.colors.background};
-  padding: ${props => props.theme.tokens.spacing.XXL.value};
-  padding-top: 0;
-  position: relative;
-
-  grid-column-start: 2;
-  grid-column-end: 3;
-
-  grid-row-start: 2;
-  grid-row-end: 3;
-
-  grid-column-gap: ${props => props.theme.tokens.spacing.XXL.value};
-
+const ActivitiesGrid = styled.div`
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: ${props => props.theme.tokens.spacing.L.value};
 
   @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-    display: grid;
-    min-width: auto;
-    width: 100%;
-    grid-row-gap: ${props => props.theme.tokens.spacing.XL.value};
-
-    grid-template-rows: 60px 1fr;
     grid-template-columns: 1fr;
-
-    grid-column-start: 1;
-    grid-column-end: 4;
-
-    padding: ${props => props.theme.tokens.spacing.L.value};
-    padding-top: 0;
   }
-`;
-
-const PageHeader = styled.h3`
-  margin-top: 0;
-  margin-bottom: ${props => props.theme.tokens.spacing.L.value};
 `;
 
 let activitiesFetchUrl;
 
 const Activities = props => {
-  const { allCookies } = props;
+  // const { cookies } = props;
   const router = useRouter();
   const { page } = router.query;
+  const { auth } = props;
+  const value = React.useContext(AuthContext);
+  const cookies = value.cookies;
+
+  console.log(auth, cookies);
 
   let [activities, setActivities] = React.useState([]);
   let [loading, setLoading] = React.useState(true);
-
-  if (page) {
-    activitiesFetchUrl =
-      "https://www.strava.com/api/v3/athlete/activities?per_page=10&page=" +
-      page;
-  } else {
-    activitiesFetchUrl =
-      "https://www.strava.com/api/v3/athlete/activities?per_page=10&page=1";
-  }
+  let [pageState, setPageState] = React.useState(1);
+  let [nextPageUrl, setNextPageUrl] = React.useState("");
+  let [previousPageUrl, setPreviousPageUrl] = React.useState("");
+  let [isFirstPage, setIsFirstPage] = React.useState(true);
 
   let currentTime = Date.now() / 1000;
-  let access_token = allCookies.access_token;
-  let expires_at = allCookies.expires_at;
+  let access_token = value.cookies.access_token;
 
   React.useEffect(() => {
-    if (!access_token) {
-      // console.log("from /activities: no access token");
-      Router.push("/");
-    } else if (parseInt(expires_at) < currentTime) {
-      // console.log("from /activities: token expired");
-    } else {
-      // console.log("from /activities: access token found");
+    setLoading(true);
+
+    if (cookies.access_token) {
+      // do nothing
+      if (page) {
+        activitiesFetchUrl =
+          "https://www.strava.com/api/v3/athlete/activities?per_page=30&page=" +
+          page;
+        setNextPageUrl("/activities?page=" + (Number(page) + 1));
+        setIsFirstPage(false);
+
+        if (page >= 2) {
+          setPreviousPageUrl("/activities?page=" + (Number(page) - 1));
+        } else if (page == 1) {
+          setPreviousPageUrl("/activities");
+          setIsFirstPage(true);
+        }
+      } else {
+        activitiesFetchUrl =
+          "https://www.strava.com/api/v3/athlete/activities?per_page=30&page=1";
+
+        setNextPageUrl("/activities?page=" + 2);
+        setIsFirstPage(true);
+      }
+
       fetch(activitiesFetchUrl, {
         method: "get",
         headers: {
@@ -90,19 +83,22 @@ const Activities = props => {
           return response.json();
         })
         .then(json => {
-          // console.log(json);
+          console.log("ACTIVITIES: data fetched");
 
           setActivities(json);
           setLoading(false);
         });
+    } else {
+      console.log("ACTIVITIES: No Auth");
+      Router.push("/");
     }
-  }, [access_token]);
+  }, [auth, page]);
 
   let parentVariants = {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05
       }
     },
     hide: {
@@ -114,10 +110,27 @@ const Activities = props => {
     show: {
       y: 0,
       opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 50 }
+      scale: 1,
+      rotateX: 0,
+      transition: { type: "spring", stiffness: 800, damping: 40 }
     },
-    hide: { y: 40, opacity: 0 }
+    hide: { y: 70, opacity: 0, scale: 0.9, rotateX: -45 }
   };
+
+  let ActivitiesPaginator = styled.div`
+    margin-top: ${props => props.theme.tokens.spacing.L.value};
+    margin-bottom: ${props => props.theme.tokens.spacing.L.value};
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    a {
+      flex-grow: 50%;
+
+      &:first-of-type {
+        padding-right: ${props => props.theme.tokens.spacing.S.value};
+      }
+    }
+  `;
 
   return (
     <Wrapper props={props}>
@@ -137,16 +150,35 @@ const Activities = props => {
                 variants={parentVariants}
                 animate={"show"}
               >
-                {activities.map(activity => (
-                  <motion.div
-                    key={activity.id}
-                    variants={childrenVariants}
-                    initial={"hide"}
-                    exit={{ opacity: 0 }}
-                  >
-                    <ActivityCard activity={activity} />
-                  </motion.div>
-                ))}
+                <ActivitiesGrid>
+                  {activities.map(activity => (
+                    <motion.div
+                      key={activity.id}
+                      variants={childrenVariants}
+                      initial={"hide"}
+                      exit={{ opacity: 0 }}
+                    >
+                      <ActivityCard activity={activity} user={props.user} />
+                    </motion.div>
+                  ))}
+                </ActivitiesGrid>
+                <ActivitiesPaginator>
+                  {isFirstPage ? (
+                    ""
+                  ) : (
+                    <Link href={previousPageUrl} as={previousPageUrl}>
+                      <a>
+                        <Button label={"← Previous page"}></Button>
+                      </a>
+                    </Link>
+                  )}
+
+                  <Link href={nextPageUrl} as={nextPageUrl}>
+                    <a>
+                      <Button label={"Next page →"}></Button>
+                    </a>
+                  </Link>
+                </ActivitiesPaginator>
               </motion.div>
             </AnimatePresence>
           )}
@@ -159,30 +191,5 @@ const Activities = props => {
 Activities.getInitialProps = async () => {
   return {};
 };
-
-// Activities.getInitialProps = token => {
-//   // let access_token = cookies.access_token;
-
-//   let parseToken = stringify(token);
-
-//   console.log(token);
-
-//   // let page = this.props.match.params.page || 1;
-//   let page = 1;
-//   let activitiesFetchUrl =
-//     "https://www.strava.com/api/v3/athlete/activities?page=" + page;
-
-//   // let response = await fetch(activitiesFetchUrl, {
-//   //   method: "get",
-//   //   headers: {
-//   //     "content-type": "application/json",
-//   //     authorization: "Bearer " + parseToken
-//   //   }
-//   // });
-
-//   // let activities = response.json();
-
-//   return "token";
-// };
 
 export default Activities;

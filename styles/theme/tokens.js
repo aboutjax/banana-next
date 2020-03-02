@@ -1,6 +1,6 @@
 export default {
   mediaQueries: { large: "1024px", small: "768px" },
-  borderRadius: { value: "6px" },
+  borderRadius: { value: "8px" },
   spacing: {
     XS: { value: "4px" },
     S: { value: "8px" },
@@ -18,6 +18,7 @@ export default {
     flamePeaapprox: { value: "#DC524D" },
     shadowGreen: { value: "#93C4C7" },
     wildBlueYonder: { value: "#7D88BC" },
+    azureRadiance: { value: "#0085FF" },
     quaterSpanishWhite: { value: "#F6F1E1" }
   },
   typography: {

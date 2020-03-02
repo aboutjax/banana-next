@@ -7,10 +7,13 @@ import SubNav from "../components/subnav";
 import { StatCard } from "../components/achievements/card";
 import { motion, AnimatePresence } from "framer-motion";
 import moment from "moment";
+import { AuthContext, useAuthState } from "./_app";
+
+import { asyncFetch } from "../components/fetchHelper";
 
 const Container = styled.div`
   background-color: ${props => props.theme.colors.background};
-  padding: ${props => props.theme.tokens.spacing.XXL.value};
+  padding: ${props => props.theme.tokens.spacing.XL.value};
   position: relative;
   padding-top: 0;
 
@@ -20,7 +23,7 @@ const Container = styled.div`
   grid-row-start: 2;
   grid-row-end: 3;
 
-  grid-column-gap: ${props => props.theme.tokens.spacing.XXL.value};
+  grid-gap: ${props => props.theme.tokens.spacing.XXL.value};
 
   display: grid;
   grid-template-columns: 200px 1fr;
@@ -29,7 +32,7 @@ const Container = styled.div`
     display: grid;
     min-width: auto;
     width: 100%;
-    grid-row-gap: ${props => props.theme.tokens.spacing.XL.value};
+    grid-gap: ${props => props.theme.tokens.spacing.XL.value};
 
     grid-template-rows: 60px 1fr;
     grid-template-columns: 1fr;
@@ -49,88 +52,62 @@ const PageHeader = styled.h3`
 
 const StatsGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-auto-rows: minmax(150px, auto);
-  grid-gap: 1em;
+  grid-gap: ${props => props.theme.tokens.spacing.XL.value};
+
+  @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Stats = props => {
   // States
   let [loading, setLoading] = React.useState(true);
-  let [user, setUser] = React.useState({});
-  let [userId, setUserId] = React.useState("");
-  let [stats, setStats] = React.useState();
+  let [stats, setStats] = React.useState({});
   let [totalMovingTime, setTotalMovingTime] = React.useState(0);
+  const { user } = useAuthState();
 
   // Cookies
-  const { allCookies } = props;
-  let access_token = allCookies.access_token;
+  // const { cookies } = props;
+  const value = React.useContext(AuthContext);
+  const cookies = value.cookies;
+  let access_token = cookies.access_token;
+
+  // Stats
 
   React.useEffect(() => {
-    // Fetch urls
-    let athleteFetchUrl = "https://www.strava.com/api/v3/athlete";
     let athleteActivityStatsFetchUrl =
-      "https://www.strava.com/api/v3/athletes/" + userId + "/stats";
-    // let requestUrls = [athleteFetchUrl, athleteActivityStatsFetchUrl];
+      "https://www.strava.com/api/v3/athletes/" + user.id + "/stats";
 
-    if (!access_token) {
-      console.log("from /year-review: no access token");
-      Router.push("/");
-    } else {
-      console.log("from /year-review: access token found");
+    asyncFetch(athleteActivityStatsFetchUrl, access_token)
+      .then(data => {
+        return data.json();
+      })
+      .then(json => {
+        setStats(json);
 
-      async function asyncFetch(url) {
-        const response = await fetch(url, {
-          method: "get",
-          headers: {
-            "content-type": "application/json",
-            authorization: "Bearer " + access_token
-          }
-        });
-        return response.json();
-      }
+        let duration = moment.duration(
+          json.all_ride_totals.moving_time,
+          "seconds"
+        );
+        let durationAsHours = duration.asHours();
 
-      asyncFetch(athleteFetchUrl)
-        .then(json => {
-          setUser(json);
-          setUserId(json.id);
-          setLoading(true);
+        function round(value, decimals) {
+          return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+        }
 
-          return json.id;
-        })
-        .then(id => {
-          asyncFetch(
-            "https://www.strava.com/api/v3/athletes/" + id + "/stats"
-          ).then(json => {
-            setStats(json);
+        setTotalMovingTime(round(durationAsHours, 1)); // 1.01);
 
-            let duration = moment.duration(
-              json.all_ride_totals.moving_time,
-              "seconds"
-            );
-            let durationAsHours = duration.asHours();
-
-            function round(value, decimals) {
-              return Number(
-                Math.round(value + "e" + decimals) + "e-" + decimals
-              );
-            }
-
-            setTotalMovingTime(round(durationAsHours, 1)); // 1.01);
-
-            setLoading(false);
-          });
-        });
-    }
-  }, [access_token]);
-
-  console.log(stats);
+        setLoading(false);
+      });
+  }, []);
 
   const parentVariants = {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.5
+        staggerChildren: 0.1
       }
     },
     hide: { opacity: 0 }

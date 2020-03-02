@@ -83,22 +83,40 @@ const ActivityMap = props => {
     mapStyle +
     mapDimensionLarge;
 
-  return (
-    <div>
-      <MapImageLarge>
-        <img
-          src={imageUrlLarge}
-          style={{
-            width: "100%"
-          }}
-          alt=""
-        />
-      </MapImageLarge>
-      <MapImageSmall>
-        <img src={imageUrlSmall} style={{ width: "100%" }} alt="" />
-      </MapImageSmall>
-    </div>
-  );
+  if (props.type == "map") {
+    return (
+      <div>
+        <MapImageLarge>
+          <img
+            src={imageUrlLarge}
+            style={{
+              width: "100%"
+            }}
+            alt=""
+          />
+        </MapImageLarge>
+        <MapImageSmall>
+          <img src={imageUrlSmall} style={{ width: "100%" }} alt="" />
+        </MapImageSmall>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <MapImageLarge>
+          <div
+            style={{
+              width: "100%"
+            }}
+            alt=""
+          />
+        </MapImageLarge>
+        <MapImageSmall>
+          <div style={{ width: "100%" }} alt="" />
+        </MapImageSmall>
+      </div>
+    );
+  }
 };
 
 export default ActivityMap;

@@ -166,30 +166,6 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  span {
-    margin-top:  ${props =>
-      props.theme.tokens.typography.large.caption.marginTop.value};
-    margin-bottom: ${props =>
-      props.theme.tokens.typography.large.caption.marginBottom.value};
-    font-size: ${props =>
-      props.theme.tokens.typography.large.caption.size.value};
-    letter-spacing: ${props =>
-      props.theme.tokens.typography.large.caption.letterSpacing.value};
-    line-height: ${props =>
-      props.theme.tokens.typography.large.caption.lineHeight.value};
-    @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
-      margin-top:  ${props =>
-        props.theme.tokens.typography.small.caption.marginTop.value};
-      margin-bottom: ${props =>
-        props.theme.tokens.typography.small.caption.marginBottom.value};
-      font-size: ${props =>
-        props.theme.tokens.typography.small.caption.size.value};
-      letter-spacing: ${props =>
-        props.theme.tokens.typography.small.caption.letterSpacing.value};
-      line-height: ${props =>
-        props.theme.tokens.typography.small.caption.lineHeight.value};
-    }
-  }
 `;
 
 export default GlobalStyle;

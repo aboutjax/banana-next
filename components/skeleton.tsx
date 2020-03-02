@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const SkeletonCard = styled(motion.div)`
   width: 100%;
-  height: 190px;
+  height: 150px;
   opacity: 1;
   opacity: 0.5;
-  margin-top: 16px;
+  margin-top: ${props => props.theme.tokens.spacing.XL.value};
   padding: ${props => props.theme.tokens.spacing.XXL.value};
   background-color: ${props => props.theme.colors.cardBackground};
   border-radius: ${props => props.theme.tokens.borderRadius.value};
@@ -46,28 +46,28 @@ function Skeleton(props) {
       <SkeletonCard
         variants={SkeletonVariants}
         animate={"show"}
-        transition={{ duration: 0.4, yoyo: Infinity, delay: 0.1 }}
+        transition={{ duration: 0.6, yoyo: Infinity, delay: 0.1 }}
       ></SkeletonCard>
       <SkeletonCard
         variants={SkeletonVariants}
         animate={"show"}
-        transition={{ duration: 0.4, yoyo: Infinity, delay: 0.2 }}
+        transition={{ duration: 0.6, yoyo: Infinity, delay: 0.2 }}
       ></SkeletonCard>
       <SkeletonCard
         variants={SkeletonVariants}
         animate={"show"}
-        transition={{ duration: 0.4, yoyo: Infinity, delay: 0.3 }}
-      ></SkeletonCard>
-      {/* <SkeletonCard
-        variants={SkeletonVariants}
-        animate={"show"}
-        transition={{ duration: 0.4, yoyo: Infinity, delay: 0.4 }}
+        transition={{ duration: 0.6, yoyo: Infinity, delay: 0.3 }}
       ></SkeletonCard>
       <SkeletonCard
         variants={SkeletonVariants}
         animate={"show"}
-        transition={{ duration: 0.4, yoyo: Infinity, delay: 0.4 }}
-      ></SkeletonCard> */}
+        transition={{ duration: 0.6, yoyo: Infinity, delay: 0.4 }}
+      ></SkeletonCard>
+      <SkeletonCard
+        variants={SkeletonVariants}
+        animate={"show"}
+        transition={{ duration: 0.6, yoyo: Infinity, delay: 0.5 }}
+      ></SkeletonCard>
     </Stack>
   );
 }

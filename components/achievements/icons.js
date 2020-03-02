@@ -10,33 +10,38 @@ let variants = {
     y: 0,
     transition: {
       rotateY: {
-        duration: 2,
+        duration: 1,
         ease: "easeInOut"
       },
       opacity: { duration: 1 },
       type: "spring",
       stiffness: 100,
-      damping: 70,
-      when: "beforeChildren"
+      damping: 70
+      // when: "beforeChildren"
     }
   }
 };
 
 let variantsTwo = {
-  hide: { opacity: 0, y: 100, scale: 0.8 },
+  hide: { opacity: 0, y: 20, scale: 0.1, rotate: 45 },
   show: {
+    rotate: 0,
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      // delay: 1,
+      delay: 1.1,
       opacity: {
-        duration: 2
+        duration: 0.2
       },
-      //   y: { duration: 6 },
+      rotate: {
+        duration: 0.4,
+        ease: "easeInOut"
+      },
+
       type: "spring",
-      stiffness: 200,
-      damping: 40
+      stiffness: 400,
+      damping: 20
     }
   }
 };
@@ -86,7 +91,7 @@ export const StatIconTwo = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0)">
+      <g clipPath="url(#clip0)">
         <path d="M0 0H120V120H0V0Z" fill="#292524" />
         <motion.circle
           variants={variantsTwo}
@@ -119,7 +124,7 @@ export const StatIconThree = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0)">
+      <g clipPath="url(#clip0)">
         <motion.path
           variants={variantsTwo}
           d="M0.5 0H120.5V120H0.5V0Z"

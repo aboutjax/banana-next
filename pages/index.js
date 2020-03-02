@@ -1,6 +1,8 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import styled from "styled-components";
+import Link from "next/link";
+
 import Wrapper from "../components/layout/wrapper";
 
 let Container = styled.div`
@@ -24,23 +26,31 @@ let Container = styled.div`
 `;
 
 const Home = props => {
-  React.useEffect(() => {
-    // console.log(props.allCookies);
-
-    let cookies = props.allCookies;
-
-    if (cookies.access_token) {
-      // console.log("has token");
-      // redirect to activities
-      Router.push("/activities");
-    } else {
-      // console.log("no token");
-    }
-  }, []);
+  const { auth } = props;
+  if (auth) {
+    //
+  } else {
+    // Router.push("/");
+  }
+  // React.useEffect(() => {
+  //   if (auth) {
+  //     console.log("HOME: logged in");
+  //     Router.push("/activities");
+  //   } else {
+  //     console.log("HOME: logged out");
+  //   }
+  // }, [auth]);
   return (
     <Wrapper>
       <Container>
         <h1>Header 1</h1>
+        <Link href="/activities/2712024607">
+          <a>Activity Detail</a>
+        </Link>
+        <br />
+        <Link href="/test/[test]" as="/test/abc/">
+          <a>Test Link</a>
+        </Link>
         <h5>https://www.cram.com/essay/the-banana-plant/P3CJMRN2AC</h5>
         <p>
           Bananas are the fruit of a plant of the genus Musa, which are

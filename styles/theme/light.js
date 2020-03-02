@@ -10,7 +10,9 @@ export default {
     statCardBackgroundBlack: Tokens.color.black.value,
     statCardBackgroundGreen: Tokens.color.shadowGreen.value,
     statCardBackgroundPurple: Tokens.color.wildBlueYonder.value,
-    statCardBackgroundBeige: Tokens.color.quaterSpanishWhite.value
+    statCardBackgroundBeige: Tokens.color.quaterSpanishWhite.value,
+    buttonBackground: Tokens.color.porcelain.value,
+    buttonLabel: Tokens.color.black.value
   },
   tokens: Tokens
 };

@@ -8,7 +8,8 @@ import {
   IconFavourites
 } from "./icons/icons";
 import useMedia from "use-media";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { whileHover, whileTap } from "../interactions/cursor";
 
 const ActivitiesNav = styled.nav`
   display: grid;
@@ -74,9 +75,10 @@ const OverlayDark = styled.div`
   }
 `;
 
-const NavItem = styled.li`
+const NavItem = styled(motion.li)`
   border-radius: ${props => props.theme.tokens.borderRadius.value};
-  padding: ${props => props.theme.tokens.spacing.M.value};
+  padding: ${props => props.theme.tokens.spacing.M.value}
+    ${props => props.theme.tokens.spacing.L.value};
   list-style: none;
   cursor: pointer;
   display: flex;
@@ -85,9 +87,6 @@ const NavItem = styled.li`
     props.active === "true"
       ? props.theme.colors.cardBackground
       : props.theme.colors.background};
-  /* &:hover {
-    opacity: 0.5;
-  } */
 
   svg {
     margin-right: ${props => props.theme.tokens.spacing.S.value};
@@ -123,21 +122,29 @@ function SubNav(props) {
     <ActivitiesNav>
       <OverlayComponent theme={mediaDarkMode}></OverlayComponent>
       <Link scroll={false} href="/activities">
-        <NavItem active={router.route === "/activities" ? "true" : "false"}>
+        <NavItem
+          whileHover={{ opacity: 0.8 }}
+          whileTap={{ opacity: 1, scale: 0.9 }}
+          active={router.route === "/activities" ? "true" : "false"}
+        >
           <IconAllActivities
             theme={mediaDarkMode ? "dark" : "light"}
           ></IconAllActivities>
           All activities
         </NavItem>
       </Link>
-      <Link scroll={false} href="/favourites">
+      {/* <Link scroll={false} href="/favourites">
         <NavItem active={router.route === "/favourites" ? "true" : "false"}>
           <IconFavourites></IconFavourites>
           Favourites
         </NavItem>
-      </Link>
+      </Link> */}
       <Link scroll={false} href="/stats">
-        <NavItem active={router.route === "/stats" ? "true" : "false"}>
+        <NavItem
+          whileHover={whileHover}
+          whileTap={whileTap}
+          active={router.route === "/stats" ? "true" : "false"}
+        >
           <IconYearInReview
             theme={mediaDarkMode ? "dark" : "light"}
           ></IconYearInReview>

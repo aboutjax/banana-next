@@ -35,10 +35,6 @@ const HandleRedirect = () => {
 
   React.useEffect(() => {
     setTokensFromUrl().then(value => {
-      console.log(value);
-
-      let firebaseToken = value.firebaseToken;
-
       setCookie("access_token", value.accessToken, {
         path: "/",
         maxAge: 604800
@@ -51,25 +47,16 @@ const HandleRedirect = () => {
         path: "/",
         maxAge: 604800
       });
-      setCookie("expires_at", value.expiresAt, { path: "/", maxAge: 604800 });
+      setCookie("expires_at", value.expiresAt, {
+        path: "/",
+        maxAge: 604800
+      });
 
-      // signInWithFirebase(firebaseToken);
-      Router.push("/");
+      Router.push("/activities");
     });
   }, []);
 
   return <div>success</div>;
-};
-
-let signInWithFirebase = token => {
-  firebase
-    .auth()
-    .signInWithCustomToken(token)
-    .catch(function(error) {
-      // Handle error
-      console.log(error.code);
-      console.log(error.message);
-    });
 };
 
 export default HandleRedirect;

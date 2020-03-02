@@ -28,7 +28,7 @@ const StatCardYellow = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border-radius: ${props => props.theme.tokens.borderRadius.value}; */
+  border-radius: ${props => props.theme.tokens.borderRadius.value};
   background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.3) 0%,
@@ -46,7 +46,7 @@ const StatCardRed = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border-radius: ${props => props.theme.tokens.borderRadius.value}; */
+  border-radius: ${props => props.theme.tokens.borderRadius.value};
   background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.3) 0%,
@@ -65,7 +65,7 @@ const StatCardBlack = styled(motion.div)`
   align-items: center;
   color: ${props => props.theme.tokens.color.white.value};
   justify-content: center;
-  /* border-radius: ${props => props.theme.tokens.borderRadius.value}; */
+  border-radius: ${props => props.theme.tokens.borderRadius.value};
   background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.3) 0%,
@@ -83,7 +83,7 @@ const StatCardGreen = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border-radius: ${props => props.theme.tokens.borderRadius.value}; */
+  border-radius: ${props => props.theme.tokens.borderRadius.value};
   background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.3) 0%,
@@ -101,7 +101,7 @@ const StatCardBeige = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border-radius: ${props => props.theme.tokens.borderRadius.value}; */
+  border-radius: ${props => props.theme.tokens.borderRadius.value};
   background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.3) 0%,
@@ -119,7 +119,7 @@ const StatCardPurple = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border-radius: ${props => props.theme.tokens.borderRadius.value}; */
+  border-radius: ${props => props.theme.tokens.borderRadius.value};
   background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.3) 0%,

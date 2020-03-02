@@ -3,6 +3,8 @@ const {
   PHASE_PRODUCTION_BUILD
 } = require("next/constants");
 
+const resolve = require("resolve");
+
 // This uses phases as outlined here: https://nextjs.org/docs/#custom-configuration
 module.exports = phase => {
   // when started in development mode `next dev` or `npm run dev` regardless of the value of STAGING environmental variable

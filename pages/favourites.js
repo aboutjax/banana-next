@@ -46,9 +46,9 @@ const PageHeader = styled.h3`
 const Favourites = props => {
   let [activities, setActivities] = React.useState([]);
   let [loading, setLoading] = React.useState(true);
-  const { allCookies } = props;
+  const { cookies } = props;
 
-  let access_token = allCookies.access_token;
+  let access_token = cookies.access_token;
 
   React.useEffect(() => {
     if (!access_token) {

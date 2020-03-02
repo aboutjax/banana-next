@@ -1,13 +1,17 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 import ActivityMap from "./map";
 import moment from "moment";
+import { motion } from "framer-motion";
+import { whileHover, whileTap } from "../interactions/cursor";
+import { useAuthState } from "../pages/_app";
 
-const Card = styled.div`
+const Card = styled(motion.div)`
   background: ${props => props.theme.colors.cardBackground};
   height: 190px;
+  cursor: pointer;
   padding: 0;
-  margin-bottom: ${props => props.theme.tokens.spacing.L.value};
   border-radius: ${props => props.theme.tokens.borderRadius.value};
   width: 100%;
   display: grid;
@@ -72,32 +76,90 @@ const MetaRowSmall = styled.div`
   }
 `;
 
-let childrenVariants = {
-  show: { y: 0, opacity: 1 },
-  hide: { y: 40 }
-};
-
 function ActivityCard({ activity }) {
+  const { user } = useAuthState();
+
+  // Rounding helper
+  function round_to_precision(x, precision) {
+    var y = +x + (precision === undefined ? 0.5 : precision / 2);
+    return y - (y % (precision === undefined ? 1 : +precision));
+  }
+
   let activityStartTime = moment(activity.start_date_local);
   let friendlyFormat = activityStartTime.format("MMM Do YYYY [at] h:mm a");
 
-  let activityDistance = Math.floor(activity.distance / 1000);
+  // Distance
+  let activityDistance = round_to_precision(activity.distance / 1000, 0.5);
+  let activityDistanceImperial = round_to_precision(
+    (activity.distance / 1000) * 0.621371,
+    0.5
+  );
+  let displayActvityDistance =
+    user.measurement_preference == "meters"
+      ? activityDistance
+      : activityDistanceImperial;
+
+  let displayActivityDistanceUnit =
+    user.measurement_preference == "meters" ? "km" : "mi";
+
+  // Elevation Gain
+  let activityTotalElevationGain = round_to_precision(
+    activity.total_elevation_gain,
+    0.5
+  );
+  let activityTotalElevationGainImperial = round_to_precision(
+    activity.total_elevation_gain * 3.28084,
+    0.5
+  );
+  let displayActivityTotalElevationGain =
+    user.measurement_preference == "meters"
+      ? activityTotalElevationGain
+      : activityTotalElevationGainImperial;
+
+  let displayActivityTotalElevationGainUnit =
+    user.measurement_preference == "meters" ? "m" : "ft";
+
   let activityMovingTime = moment.duration(activity.moving_time, "seconds");
   let activityMovingTimeHours = activityMovingTime.get("hours");
   let activityMovingTimeMinutes = activityMovingTime.get("minutes");
   let activityMovingTimeSeconds = activityMovingTime.get("seconds");
 
-  let activityTotalElevationGain = Math.floor(activity.total_elevation_gain);
-
   return (
-    <Card>
-      <ActivityMap polyline={activity.map.summary_polyline}></ActivityMap>
-      <CardMeta>
-        <MetaGroup>
-          <MetaHeader>{activity.name}</MetaHeader>
-          <MetaDescription>{friendlyFormat}</MetaDescription>
-        </MetaGroup>
-        <MetaRowLarge>
+    <Link href={"/activities/[activity]"} as={`/activities/${activity.id}`}>
+      <Card whileHover={whileHover} whileTap={whileTap}>
+        <ActivityMap
+          type={activity.start_latlng ? "map" : "nomap"}
+          polyline={activity.map.summary_polyline}
+        ></ActivityMap>
+        <CardMeta>
+          <MetaGroup>
+            <MetaHeader>{activity.name}</MetaHeader>
+            <MetaDescription>{friendlyFormat}</MetaDescription>
+          </MetaGroup>
+          <MetaRowLarge>
+            <MetaGroup>
+              <MetaHeader>
+                {displayActvityDistance} {displayActivityDistanceUnit}
+              </MetaHeader>
+              <MetaDescription>Distance</MetaDescription>
+            </MetaGroup>
+            <MetaGroup>
+              <MetaHeader>
+                {activityMovingTimeHours}:{activityMovingTimeMinutes}:
+                {activityMovingTimeSeconds}
+              </MetaHeader>
+              <MetaDescription>Duration</MetaDescription>
+            </MetaGroup>
+            <MetaGroup>
+              <MetaHeader>
+                {displayActivityTotalElevationGain}{" "}
+                {displayActivityTotalElevationGainUnit}
+              </MetaHeader>
+              <MetaDescription>Elevation</MetaDescription>
+            </MetaGroup>
+          </MetaRowLarge>
+        </CardMeta>
+        <MetaRowSmall>
           <MetaGroup>
             <MetaHeader>{activityDistance} km</MetaHeader>
             <MetaDescription>Distance</MetaDescription>
@@ -113,26 +175,9 @@ function ActivityCard({ activity }) {
             <MetaHeader>{activityTotalElevationGain} km</MetaHeader>
             <MetaDescription>Elevation</MetaDescription>
           </MetaGroup>
-        </MetaRowLarge>
-      </CardMeta>
-      <MetaRowSmall>
-        <MetaGroup>
-          <MetaHeader>{activityDistance} km</MetaHeader>
-          <MetaDescription>Distance</MetaDescription>
-        </MetaGroup>
-        <MetaGroup>
-          <MetaHeader>
-            {activityMovingTimeHours}:{activityMovingTimeMinutes}:
-            {activityMovingTimeSeconds}
-          </MetaHeader>
-          <MetaDescription>Duration</MetaDescription>
-        </MetaGroup>
-        <MetaGroup>
-          <MetaHeader>{activityTotalElevationGain} km</MetaHeader>
-          <MetaDescription>Elevation</MetaDescription>
-        </MetaGroup>
-      </MetaRowSmall>
-    </Card>
+        </MetaRowSmall>
+      </Card>
+    </Link>
   );
 }
 
