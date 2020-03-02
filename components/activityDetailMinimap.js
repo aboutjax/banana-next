@@ -6,11 +6,8 @@ import useMedia from "use-media";
 let latLngCircleSize = 10;
 let latLngCircleOpacity = 1;
 const style = {
-  // top: 0,
-  // bottom: 0,
   height: "200px",
   width: "100%"
-  // position: "absolute"
 };
 
 const SmallMap = props => {

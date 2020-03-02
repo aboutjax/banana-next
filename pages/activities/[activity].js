@@ -32,10 +32,10 @@ const ActivityDetailLongScroll = styled.div`
   }
 `;
 
-// const DynamicMapboxLargeComponent = dynamic(
-//   () => import("../../components/activityDetailMap"),
-//   { ssr: false }
-// );
+const DynamicMapboxLargeComponent = dynamic(
+  () => import("../../components/activityDetailMap"),
+  { ssr: false }
+);
 
 const DynamicMapboxSmallComponent = dynamic(
   () => import("../../components/activityDetailMiniMap"),
@@ -160,7 +160,7 @@ const ActivityDetail = props => {
         </ActivityDetailLongScroll>
         {activitySummary.start_latlng ? (
           <LargeMapContainer>
-            {/* <DynamicMapboxLargeComponent activitySummary={activitySummary} /> */}
+            <DynamicMapboxLargeComponent activitySummary={activitySummary} />
           </LargeMapContainer>
         ) : (
           <div />
