@@ -180,13 +180,13 @@ const RenderLineChart = props => {
             dataKey="distance"
             minTickGap={20}
           ></XAxis>
-          <YAxis
+          {/* <YAxis
             tick={<Tick />}
             minTickGap={30}
             type="number"
             dataKey="altitude"
             orientation="right"
-          />
+          /> */}
 
           <Area
             type="monotone"
