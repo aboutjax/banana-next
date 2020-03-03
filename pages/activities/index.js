@@ -34,8 +34,6 @@ const Activities = props => {
   const value = React.useContext(AuthContext);
   const cookies = value.cookies;
 
-  console.log(auth, cookies);
-
   let [activities, setActivities] = React.useState([]);
   let [loading, setLoading] = React.useState(true);
   let [pageState, setPageState] = React.useState(1);
@@ -47,8 +45,6 @@ const Activities = props => {
   let access_token = value.cookies.access_token;
 
   React.useEffect(() => {
-    setLoading(true);
-
     if (cookies.access_token) {
       // do nothing
       if (page) {
@@ -83,16 +79,16 @@ const Activities = props => {
           return response.json();
         })
         .then(json => {
-          console.log("ACTIVITIES: data fetched");
+          // console.log("ACTIVITIES: data fetched");
 
           setActivities(json);
           setLoading(false);
         });
     } else {
-      console.log("ACTIVITIES: No Auth");
+      // console.log("ACTIVITIES: No Auth");
       Router.push("/");
     }
-  }, [auth, page]);
+  }, [auth, page, value]);
 
   let parentVariants = {
     show: {

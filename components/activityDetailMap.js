@@ -30,17 +30,17 @@ const Map = props => {
     let mapTheme;
 
     if (mediaDarkMode) {
-      console.log("dark mode");
+      // console.log("dark mode");
       mapTheme = "mapbox://styles/mapbox/dark-v10";
     } else {
-      console.log("light mode");
+      // console.log("light mode");
       mapTheme = "mapbox://styles/p0pmaker/cjrf0kzjd4xde2tqwor6ltd0u";
     }
 
     let map;
 
     const initializeMap = ({ setMap, mapContainer }) => {
-      console.log("init map");
+      // console.log("init map");
 
       map = new mapboxgl.Map({
         container: mapContainer.current,

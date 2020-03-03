@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 import moment from "moment";
 import { SummaryCard } from "../../components/activity-detail/summary-card";
 import { AuthContext } from "../_app";
+import RenderLineChart from "../../components/activityCharts";
 
 const MetaDescription = styled.p`
   opacity: 0.5;
@@ -74,7 +75,6 @@ const SmallMapContainer = styled.div`
 const smallMapStyle = { position: "relative", width: "100%", height: "200px" };
 
 const ActivityDetail = props => {
-  // const { cookies } = props;
   const router = useRouter();
   const { activity } = router.query;
   let [loading, setLoading] = React.useState(true);
@@ -88,9 +88,6 @@ const ActivityDetail = props => {
   let access_token = cookies.access_token;
   let expires_at = cookies.expires_at;
 
-  const { auth } = props;
-  console.log(auth);
-
   React.useEffect(() => {
     let activityFetchUrl =
       "https://www.strava.com/api/v3/activities/" + activity;
@@ -99,30 +96,26 @@ const ActivityDetail = props => {
       activityFetchUrl +
       "/streams/watts,altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium";
 
-    function fetchActivitySummary() {
-      return asyncFetch(activityFetchUrl, access_token);
-    }
+    let fetchUrls = [activityFetchUrl, activityStreamFetchUrl];
 
-    function fetchActivityStream() {
-      return asyncFetch(activityStreamFetchUrl, access_token);
-    }
-    let fetchAllData = () => {
-      return Promise.all([fetchActivitySummary(), fetchActivityStream()]);
-    };
-
-    fetchAllData().then(([summary, stream]) => {
-      summary.json().then(json => {
-        console.log(json);
-        setActivitySummary(json);
+    Promise.all(
+      fetchUrls.map(url =>
+        fetch(url, {
+          method: "get",
+          headers: {
+            "content-type": "application/json",
+            authorization: "Bearer " + access_token
+          }
+        })
+      )
+    )
+      .then(responses => Promise.all(responses.map(res => res.json())))
+      .then(([summary, stream]) => {
+        setActivitySummary(summary);
+        setActivityStream(stream);
+        setLoading(false);
       });
-
-      stream.json().then(json => {
-        setActivityStream(json);
-      });
-
-      setLoading(false);
-    });
-  }, []);
+  }, [value]);
 
   let activityStartTime = moment(activitySummary.start_date_local);
   let friendlyFormat = activityStartTime.format("MMM Do YYYY [at] h:mm a");
@@ -145,17 +138,15 @@ const ActivityDetail = props => {
               <PageHeader>{activitySummary.name}</PageHeader>
               <MetaDescription>{friendlyFormat}</MetaDescription>
               <p>{activitySummary.description}</p>
-              <div style={smallMapStyle}>
-                {activitySummary.start_latlng ? (
-                  <SmallMapContainer>
-                    <DynamicTestJacky activitySummary={activitySummary} />
-                  </SmallMapContainer>
-                ) : (
-                  <div />
-                )}
-
-                <SummaryCard activitySummary={activitySummary} />
-              </div>
+              {activitySummary.start_latlng ? (
+                <SmallMapContainer>
+                  <DynamicTestJacky activitySummary={activitySummary} />
+                </SmallMapContainer>
+              ) : (
+                <div></div>
+              )}
+              <RenderLineChart data={activityStream}></RenderLineChart>
+              <SummaryCard activitySummary={activitySummary} />
             </div>
           )}
         </ActivityDetailLongScroll>

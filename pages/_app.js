@@ -124,53 +124,15 @@ function AuthContextProvider({ children }) {
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
 }
 
-// function MyApp({ Component, pageProps }) {
-//   const mediaDarkMode = useMedia("(prefers-color-scheme: dark)");
-//   return (
-{
-  /* <ThemeProvider theme={mediaDarkMode ? DarkTheme : LightTheme}>
-  <Head>
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css"
-      rel="stylesheet"
-    />
-  </Head>
-
-  <Component {...pageProps} />
-
-  <GlobalStyle></GlobalStyle>
-</ThemeProvider> */
-}
-//   );
-// }
-
-// function AuthenticatedApp({ children }) {
-//   const mediaDarkMode = useMedia("(prefers-color-scheme: dark)");
-//   return (
-//     <ThemeProvider theme={mediaDarkMode ? DarkTheme : LightTheme}>
-//       <Head>
-//         <link
-//           href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css"
-//           rel="stylesheet"
-//         />
-//       </Head>
-
-//       {children}
-
-//       <GlobalStyle></GlobalStyle>
-//     </ThemeProvider>
-//   );
-// }
-
-// function UnauthenticatedApp() {
-//   return <About></About>;
-// }
-
 function Home({ Component, pageProps }) {
   const { isSuccess, isPending } = useAuthState();
   const router = useRouter();
 
   let isHandleRedirect = router.route == "/handle_redirect";
+
+  React.useEffect(() => {
+    console.log(isSuccess);
+  }, [isSuccess]);
 
   if (isSuccess) {
     return (
