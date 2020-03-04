@@ -190,7 +190,6 @@ const RenderLineChart = props => {
             dataKey="altitude"
             orientation="right"
             hide={true}
-            domain={[-7, 20]}
           />
 
           <Area
