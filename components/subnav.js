@@ -125,7 +125,11 @@ function SubNav(props) {
         <NavItem
           whileHover={{ opacity: 0.8 }}
           whileTap={{ opacity: 1, scale: 0.9 }}
-          active={router.route === "/activities" ? "true" : "false"}
+          active={
+            router.route === "/activities" || router.route === "/"
+              ? "true"
+              : "false"
+          }
         >
           <IconAllActivities
             theme={mediaDarkMode ? "dark" : "light"}

@@ -25,7 +25,7 @@ const PageHeader = styled.h3`
 const ActivityDetailLongScroll = styled.div`
   padding: ${props => props.theme.tokens.spacing.XL.value};
   padding-top: 100px;
-  max-width: 800px;
+  max-width: 1024px;
 
   @media (max-width: ${props => props.theme.tokens.mediaQueries.small}) {
     padding: ${props => props.theme.tokens.spacing.L.value};
@@ -38,13 +38,12 @@ const DynamicMapboxLargeComponent = dynamic(
   { ssr: false }
 );
 
-// const DynamicMapboxSmallComponent = dynamic(
-//   () => import("../../components/activityDetailMiniMap"),
-//   { ssr: false }
-// );
-const DynamicTestJacky = dynamic(() => import("../../components/testJacky"), {
-  ssr: false
-});
+const DynamicMapboxSmallComponent = dynamic(
+  () => import("../../components/activityDetailMapMini"),
+  {
+    ssr: false
+  }
+);
 
 const LargeMapContainer = styled.div`
   display: block;
@@ -72,8 +71,6 @@ const SmallMapContainer = styled.div`
   }
 `;
 
-const smallMapStyle = { position: "relative", width: "100%", height: "200px" };
-
 const ActivityDetail = props => {
   const router = useRouter();
   const { activity } = router.query;
@@ -94,7 +91,7 @@ const ActivityDetail = props => {
 
     let activityStreamFetchUrl =
       activityFetchUrl +
-      "/streams/watts,altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium";
+      "/streams/watts,altitude,heartrate,latlng,cadence,velocity_smooth?resolution=low";
 
     let fetchUrls = [activityFetchUrl, activityStreamFetchUrl];
 
@@ -140,7 +137,9 @@ const ActivityDetail = props => {
               <p>{activitySummary.description}</p>
               {activitySummary.start_latlng ? (
                 <SmallMapContainer>
-                  <DynamicTestJacky activitySummary={activitySummary} />
+                  <DynamicMapboxSmallComponent
+                    activitySummary={activitySummary}
+                  />
                 </SmallMapContainer>
               ) : (
                 <div></div>

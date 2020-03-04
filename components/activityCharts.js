@@ -25,14 +25,16 @@ const ChartContainer = styled.div`
   position: relative;
 `;
 
+let displayActivityDistanceUnit;
+
 const Tick = ({
   payload: { value },
   verticalAnchor,
   visibleTicksCount,
   ...rest
 }) => (
-  <text {...rest} dy={16}>
-    {value}
+  <text style={{ fontSize: "12px" }} {...rest} dy={16}>
+    {value} {displayActivityDistanceUnit}
   </text>
 );
 
@@ -52,10 +54,11 @@ const RenderLineChart = props => {
   const mediaDarkMode = useMedia("(prefers-color-scheme: dark)");
   let originalArray = props.data;
   console.log(originalArray);
+  const [showHeartrate, setShowHeartrate] = React.useState(true);
 
   const { user } = useAuthState();
 
-  let displayActivityDistanceUnit =
+  displayActivityDistanceUnit =
     user.measurement_preference == "meters" ? "km" : "mi";
 
   let displayActivityTotalElevationGainUnit =
@@ -112,19 +115,19 @@ const RenderLineChart = props => {
     let toKM = m / 1000;
     let toKPH = toKM * 60 * 60;
 
-    return _.round(toKPH, 2);
+    return _.round(toKPH, 3);
   }
 
   function KPHtoMPH(kph) {
     let mph = kph * 0.621371;
 
-    return _.round(mph, 2);
+    return _.round(mph, 3);
   }
 
   function kmToMiles(km) {
     let mi = km * 0.621371;
 
-    return _.round(mi, 2);
+    return _.round(mi, 3);
   }
 
   let speedKPH = _.map(speedStream, toKPH);
@@ -170,7 +173,7 @@ const RenderLineChart = props => {
       <ResponsiveContainer width={"99%"} height={200}>
         <ComposedChart data={formattedData}>
           <Tooltip content={<CustomTooltip />} />
-          {/* <CartesianGrid></CartesianGrid> */}
+          <CartesianGrid></CartesianGrid>
           <XAxis
             tick={<Tick />}
             type="number"
@@ -180,13 +183,15 @@ const RenderLineChart = props => {
             dataKey="distance"
             minTickGap={20}
           ></XAxis>
-          {/* <YAxis
+          <YAxis
             tick={<Tick />}
             minTickGap={30}
             type="number"
             dataKey="altitude"
             orientation="right"
-          /> */}
+            hide={true}
+            domain={[-7, 20]}
+          />
 
           <Area
             type="monotone"
@@ -196,16 +201,19 @@ const RenderLineChart = props => {
             strokeWidth={0}
             dot={false}
             fill={mediaDarkMode ? "#fff" : "#000"}
-            fillOpacity={0.3}
+            fillOpacity={0.2}
           />
-          <Line
-            type="monotone"
-            dataKey="heartrate"
-            unit="bpm"
-            stroke="#DC524D"
-            strokeWidth={1}
-            dot={false}
-          />
+          {showHeartrate ? (
+            <Line
+              type="monotone"
+              dataKey="heartrate"
+              unit="bpm"
+              stroke="#DC524D"
+              strokeWidth={1}
+              dot={false}
+            />
+          ) : null}
+
           <Line
             type="monotone"
             dataKey="speed"

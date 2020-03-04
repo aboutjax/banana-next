@@ -6,7 +6,7 @@ import useMedia from "use-media";
 let latLngCircleSize = 10;
 let latLngCircleOpacity = 1;
 const style = {
-  height: "200px",
+  height: "400px",
   width: "100%"
 };
 
